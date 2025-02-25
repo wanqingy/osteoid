@@ -1085,7 +1085,7 @@ class Skeleton:
         continue
       (vid, vtype, x, y, z, radius, parent_id) = line.split(" ")
       
-      coord = tuple([ float(_) for _ in (x,y,z) ])
+      coord = ( float(x), float(y), float(z) )
       vid = int(vid)
       parent_id = int(parent_id)
 

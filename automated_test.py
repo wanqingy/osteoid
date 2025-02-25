@@ -4,6 +4,7 @@ import copy
 import math
 import numpy as np
 
+import osteoid
 from osteoid import Skeleton
 from osteoid.exceptions import SkeletonDecodeError, SkeletonAttributeMixingError
 
@@ -485,3 +486,36 @@ def test_simple_merge():
     assert False
   except SkeletonAttributeMixingError:
     pass
+
+def test_paths():
+  skel1 = Skeleton(
+    [ (0,0,0), (1,0,0), (2,0,0), (1,1,0) ], 
+    edges=[ (0,1), (1,2), (1,3) ],
+    segid=1,
+  )
+
+  path = skel1.paths()
+
+  path1 = np.array([[0,0,0], [1,0,0], [1,1,0]])
+  path2 = np.array([[2,0,0], [1,0,0], [1,1,0]])
+
+  assert np.all(path[0] == path1)
+  assert np.all(path[1] == path2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

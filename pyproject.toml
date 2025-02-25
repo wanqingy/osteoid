@@ -14,12 +14,3 @@ dependencies = [
     "pybind11 (>=2.13.6,<3.0.0)",
     "numpy (>=2.2.3,<3.0.0)"
 ]
-
-[tool.poetry]
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.3.4"
-
-[build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"

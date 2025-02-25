@@ -8,12 +8,6 @@
 #include <vector>
 #include <unordered_map>
 
-#include "crackle.hpp"
-#include "operations.hpp"
-#include "cc3d.hpp"
-#include "pins.hpp"
-#include "robin_hood.hpp"
-
 namespace py = pybind11;
 
 template <typename LABEL>

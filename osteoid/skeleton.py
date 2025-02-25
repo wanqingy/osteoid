@@ -1255,8 +1255,9 @@ class Skeleton:
     """
     View the skeleton with a radius heatmap. 
 
-    Requires the matplotlib library which is 
-    not installed by default.
+    Requires either the matplotlib library or the
+    microviewer+vtk libraries which are not installed
+    by default.
 
     units: label axes with these units
     draw_edges: draw lines between vertices (more useful when skeleton is sparse)
@@ -1269,15 +1270,19 @@ class Skeleton:
       'cross_section': color each vertex according to its cross sectional area
         aliases: 'x'
       anything else: draw everything black
+    library: 'auto', 'matplotlib', or 'microviewer'
+      'auto' will try to detect which libraries are installed
+        and use microviewer and then matplotlib in that order.
     """
-    from .viewer import view_matplotlib, view_vtk
+    from .viewer import view_matplotlib
     if library == "auto":
       try:
+        import microviewer
+        import vtk
+        microviewer.objects([self])
+      except ImportError:
         import matplotlib
         view_matplotlib(self, units, draw_edges, draw_vertices, color_by)
-      except ImportError:
-        import microviewer
-        microviewer.objects([self])
     elif library == "matplotlib":
       view_matplotlib(self, units, draw_edges, draw_vertices, color_by)
     elif library in "microviewer":

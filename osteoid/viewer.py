@@ -1,8 +1,9 @@
+import numpy as np
 
 def view_matplotlib(
-	skel, units='nm', 
-	draw_edges=True, draw_vertices=True,
-	color_by='radius'
+  skel, units='nm', 
+  draw_edges=True, draw_vertices=True,
+  color_by='radius'
 ):
     """
     View the skeleton with a radius heatmap. 
@@ -22,8 +23,8 @@ def view_matplotlib(
         aliases: 'x'
       anything else: draw everything black
     """
-	  import matplotlib.pyplot as plt
-	  from matplotlib import cm
+    import matplotlib.pyplot as plt
+    from matplotlib import cm
 
     RADII_KEYWORDS = ('radius', 'radii', 'r')
     CROSS_SECTION_KEYWORDS = ('cross_section', 'x')

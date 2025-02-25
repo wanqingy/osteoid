@@ -24,6 +24,9 @@ IDENTITY = np.array([
   [0, 0, 1, 0],
 ], dtype=np.float32)
 
+import importlib.metadata
+__VERSION__ = importlib.metadata.version("osteoid")
+
 class Skeleton:
   """
   A stick figure representation of a 3D object.
@@ -1136,10 +1139,9 @@ class Skeleton:
 
     Returns: swc as a string
     """
-    from . import __version__
     sx, sy, sz = np.diag(self.transform)[:3]
 
-    swc_header = f"""# ORIGINAL_SOURCE Osteoid {__version__}
+    swc_header = f"""# ORIGINAL_SOURCE Osteoid {__VERSION__}
 # CREATURE 
 # REGION
 # FIELD/LAYER
@@ -1150,8 +1152,8 @@ class Skeleton:
 # EXTRAS 
 # SOMA_AREA
 # SHINKAGE_CORRECTION 
-# VERSION_NUMBER {__version__}
-# VERSION_DATE {datetime.datetime.utcnow().isoformat()}
+# VERSION_NUMBER {__VERSION__}
+# VERSION_DATE {datetime.datetime.now(datetime.UTC).isoformat()}
 # SCALE {sx:.6f} {sy:.6f} {sz:.6f}
 """
 

@@ -1061,7 +1061,7 @@ class Skeleton:
     if len(navis_skel.nodes.type):
       # 'root', 'slab', 'branch', 'end', first letter of each
       vertex_types = [ ord(t[0]) for t in navis_skel.nodes.type ] 
-      mapping = np.zeros(255, dtype=np.uint8)
+      mapping = np.zeros(ord('t') + 1, dtype=np.uint8)
       mapping[ord('s')] = 7 # custom
       mapping[ord('r')] = 8 # custom
       mapping[ord('b')] = 5 # fork point

@@ -365,6 +365,11 @@ class Skeleton:
   def empty(self):
     return self.vertices.size == 0 or self.edges.size == 0
 
+  def to_networkx(self):
+    G = nx.Graph()
+    G.add_edges_from(self.edges)
+    return G
+
   def to_precomputed(self):
     edges = self.edges.astype(np.uint32)
     vertices = self.vertices.astype(np.float32)

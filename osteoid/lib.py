@@ -2,6 +2,8 @@
 
 from typing import Union
 
+from functools import reduce
+import operator
 import re
 
 import numpy as np

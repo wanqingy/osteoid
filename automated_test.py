@@ -503,19 +503,3 @@ def test_paths():
   assert np.all(path[1] == path2)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

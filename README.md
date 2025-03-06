@@ -19,7 +19,7 @@ import osteoid
 skel = osteoid.load("skeleton.swc")
 osteoid.save("skeleton.swc", skel)
 
-from osteoid import Skeleton
+from osteoid import Skeleton, Bbox
 
 skel = Skeleton(vertices, edges, radii=radii)
 
@@ -44,6 +44,9 @@ comps = skel.components() # connected components
 paths = skel.paths() # convert tree into a list of linear paths
 skel = skel.downsample(factor) # factor must be a pos integer
 skel = skel.average_smoothing(7) # smooths over a window of e.g. 7 vertices
+
+skel2 = skel.crop([ minx, miny, minz, maxx, maxy, maxz ])
+skel2 = skel.crop(Bbox([minx, miny, minz], [maxx, maxy, maxz]))
 
 G = skel.to_networkx() # converts edges to an nx.Graph()
 

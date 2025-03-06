@@ -553,7 +553,9 @@ class Skeleton:
     # Set invalid vertices to be duplicates
     # so they'll be removed during consolidation
     if not np.any(nodes_valid_mask):
-      return Skeleton(extra_attributes=self.extra_attributes)
+      empty_skel = Skeleton(extra_attributes=self.extra_attributes)
+      empty_skel._materialize_extra_attributes()
+      return empty_skel
 
     nodes_valid_idx = np.where(nodes_valid_mask)[0]
 

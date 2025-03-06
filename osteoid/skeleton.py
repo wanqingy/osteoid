@@ -544,8 +544,8 @@ class Skeleton:
     if skeleton.empty():
       return skeleton
 
-    nodes_valid_mask = (skeleton.vertices < bbox.maxpt)
-    nodes_valid_mask &= (bbox.minpt < skeleton.vertices)
+    nodes_valid_mask = (skeleton.vertices <= bbox.maxpt)
+    nodes_valid_mask &= (bbox.minpt <= skeleton.vertices)
     nodes_valid_mask = (
       nodes_valid_mask[:,0] & nodes_valid_mask[:,1] & nodes_valid_mask[:,2]
     )

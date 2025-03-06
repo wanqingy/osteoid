@@ -5,7 +5,7 @@ import math
 import numpy as np
 
 import osteoid
-from osteoid import Skeleton
+from osteoid import Skeleton, Bbox
 from osteoid.exceptions import SkeletonDecodeError, SkeletonAttributeMixingError
 
 def test_consolidate():
@@ -501,5 +501,31 @@ def test_paths():
 
   assert np.all(path[0] == path1)
   assert np.all(path[1] == path2)
+
+def test_crop():
+  skel = Skeleton(
+    [ (0,0,0), (10,0,1), (20,0,2), (30,1,3) ], 
+    edges=[ (0,1), (1,2), (1,3) ],
+    segid=1,
+  )
+
+  bbx = Bbox([5,-1,0], [25,5,3])
+  res = skel.crop(bbx)
+
+  assert np.all(res.vertices == np.array([(10,0,1), (20,0,2)]))
+
+  bbx = Bbox([100,-1,0], [200,5,3])
+  res = skel.crop(bbx)
+  assert len(res.vertices) == 0
+
+  bbx = Bbox([-100,-100,-100], [200,500,400])
+  res = skel.crop(bbx)
+  assert np.all(res.vertices == skel.vertices)
+
+
+
+
+
+
 
 

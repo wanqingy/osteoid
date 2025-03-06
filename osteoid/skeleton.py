@@ -544,21 +544,24 @@ class Skeleton:
     if skeleton.empty():
       return skeleton
 
-    nodes_valid_mask = np.array(
-      [ bbox.contains(vtx) for vtx in skeleton.vertices ], dtype=bool
+    nodes_valid_mask = (skeleton.vertices < bbox.maxpt)
+    nodes_valid_mask &= (bbox.minpt < skeleton.vertices)
+    nodes_valid_mask = (
+      nodes_valid_mask[:,0] & nodes_valid_mask[:,1] & nodes_valid_mask[:,2]
     )
-    nodes_valid_idx = np.where(nodes_valid_mask)[0]
 
     # Set invalid vertices to be duplicates
     # so they'll be removed during consolidation
-    if nodes_valid_idx.shape[0] == 0:
+    if not np.any(nodes_valid_mask):
       return Skeleton()
+
+    nodes_valid_idx = np.where(nodes_valid_mask)[0]
 
     first_node = nodes_valid_idx[0]
     skeleton.vertices[~nodes_valid_mask] = skeleton.vertices[first_node]
   
     edges_valid_mask = np.isin(skeleton.edges, nodes_valid_idx)
-    edges_valid_idx = edges_valid_mask[:,0] * edges_valid_mask[:,1] 
+    edges_valid_idx = edges_valid_mask[:,0] & edges_valid_mask[:,1] 
     skeleton.edges = skeleton.edges[edges_valid_idx,:]
     return skeleton.consolidate()
 

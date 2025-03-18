@@ -7,7 +7,7 @@ authors = [
 ]
 license = {text = "BSD-3 Clause"}
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.8"
 dependencies = [
     "fastremap (>=1.14.0,<2.0.0)",
     "networkx (>=3.0.0,<4.0.0)",

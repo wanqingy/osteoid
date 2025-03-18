@@ -1187,7 +1187,7 @@ class Skeleton:
 # SOMA_AREA
 # SHINKAGE_CORRECTION 
 # VERSION_NUMBER {__VERSION__}
-# VERSION_DATE {datetime.datetime.now(datetime.UTC).isoformat()}
+# VERSION_DATE {datetime.datetime.now(datetime.timezone.utc).isoformat()}
 # SCALE {sx:.6f} {sy:.6f} {sz:.6f}
 """
 

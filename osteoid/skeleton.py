@@ -930,7 +930,12 @@ class Skeleton:
           stack.append(child)
           parents.append(node)
 
-      return np.unique(edge_list[1:], axis=0)
+      el = np.array(edge_list[1:], dtype=np.uint32)
+      el = el.reshape((el.size,), order="C")
+      el = el.view(np.uint64)
+      el = fastremap.unique(el)
+      N = len(el)
+      return el.view(np.uint32).reshape((N, 2), order="C")
 
     forest = []
     for edge in fastremap.unique(skel.edges.flat):

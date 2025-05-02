@@ -899,7 +899,7 @@ class Skeleton:
 
   def _compute_components(self, skel):
     if skel.edges.size == 0:
-      return skel, []
+      return [ skel ]
 
     index = defaultdict(set)
     visited = defaultdict(bool)

@@ -1,6 +1,6 @@
 [project]
 name = "osteoid"
-version = "0.3.1"
+version = "0.3.2"
 description = "Skeleton object used for representing neurons, adjacent cells, and organelles."
 authors = [
     {name = "William Silversmith",email = "william.silversmith@gmail.com"}

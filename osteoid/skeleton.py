@@ -347,7 +347,7 @@ class Skeleton:
     Returns vertex indices that correspond to terminal 
     nodes of the skeleton defined as having only one edge.
     """
-    unique_nodes, unique_counts = np.unique(self.edges, return_counts=True)
+    unique_nodes, unique_counts = fastremap.unique(self.edges, return_counts=True)
     return unique_nodes[ unique_counts == 1 ]
 
   def branches(self):
@@ -355,7 +355,7 @@ class Skeleton:
     Returns vertex indices that correspond to branch points
     in the skeleton defined as having three or more edges.
     """
-    unique_nodes, unique_counts = np.unique(self.edges, return_counts=True)
+    unique_nodes, unique_counts = fastremap.unique(self.edges, return_counts=True)
     return unique_nodes[ unique_counts >= 3 ]
 
   def merge(self, skel):
@@ -494,8 +494,8 @@ class Skeleton:
 
     EPSILON = 1e-7
 
-    vertex1, ct1 = np.unique(first.vertices, axis=0, return_counts=True)
-    vertex2, ct2 = np.unique(second.vertices, axis=0, return_counts=True)
+    vertex1, ct1 = fastremap.unique(first.vertices, axis=0, return_counts=True)
+    vertex2, ct2 = fastremap.unique(second.vertices, axis=0, return_counts=True)
     
     vertex_match = np.all(np.abs(vertex1 - vertex2) < EPSILON)
     ct_match = np.all(ct1 == ct2)
@@ -589,7 +589,7 @@ class Skeleton:
         transform=self.transform,
       )
     
-    eff_vertices, uniq_idx, idx_representative = np.unique(
+    eff_vertices, uniq_idx, idx_representative = fastremap.unique(
       nodes, axis=0, return_index=True, return_inverse=True
     )
 
@@ -645,7 +645,7 @@ class Skeleton:
     for i, vert in enumerate(self.vertices):
       idx_map[tuple(vert)] = i
 
-    connected_verts = np.unique(self.vertices[ self.edges.flat ], axis=0)
+    connected_verts = fastremap.unique(self.vertices[ self.edges.flat ], axis=0)
 
     edge_map = np.zeros( (len(self.vertices),), dtype=self.edges.dtype)
     vertex_remap = np.zeros( (len(self.vertices),), dtype=np.int32) - 1

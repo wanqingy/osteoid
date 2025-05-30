@@ -890,6 +890,9 @@ class Skeleton:
     """
     paths = []
     for tree in self.components():
+      # skip components with no terminal (loops)
+      if tree.terminals().size == 0:
+        continue
       subpaths = self._single_tree_interjoint_paths(
         tree, return_indices=return_indices
       )
